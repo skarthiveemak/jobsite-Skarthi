@@ -1,0 +1,195 @@
+<!-- <section id="post_job">
+  <div class="form-group col-lg-6">
+<form #userPost="ngForm" style="margin-top: 150px; margin-left: 50%;" (ngSubmit)="onSubmit(userPost.value)">
+  <input type="text" class="form-control" name="JobNo" ngModel placeholder="JobNo"><br><br>
+  <input type="text" class="form-control" name="JobTitle" ngModel placeholder="JobTitle"><br><br>
+  <input type="text" class="form-control" name="CompanyName" ngModel placeholder="Company Name"><br><br>
+  <input type="text" class="form-control" name="Location" ngModel placeholder="Location"><br><br>
+  <input type="text" class="form-control" name="ShortDescription" ngModel placeholder="Short Description"><br><br>
+  <input type="text" class="form-control" name="FullDescription" ngModel placeholder="Full Description"><br><br>
+  <input type="text" class="form-control" name="JobNature" ngModel placeholder="Job Nature"><br><br>
+  <input type="text" class="form-control" name="SalaryRange" ngModel placeholder="Salary Range"><br><br>
+  <button type="button" type="submit" class="btn btn-primary">Post Job Offer</button>
+</form>
+</div>
+</section>-->
+<br>
+<br>
+<br>
+
+<!-- <ul>
+  <li *ngFor="let item of data">
+    {{item.Location}}
+  </li>
+</ul> -->
+<!-- <div>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item" *ngFor="let item of data">{{item.JobNo}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.JobTitle}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.CompanyName}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.Location}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.ShortDescription}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.FullDescription}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.JobNature}}</li>
+  <li class="list-group-item" *ngFor="let item of data">{{item.SalaryRange}}</li>
+</ul>
+</div> -->
+
+<h3 style="text-align: center; margin-top: 100px;">Posted Job Details</h3>
+<br>
+<br>
+<div>
+<table class="table table-striped" style="text-align: center;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">JobNo</th>
+      <th scope="col">JobTitle</th>
+      <th scope="col">CompanyName</th>
+      <th scope="col">Location</th>
+      <th scope="col">ShortDescription</th>
+      <th scope="col">FullDescription</th>
+      <th scope="col">JobNature</th>
+      <th scope="col">SalaryRange</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let data of data">
+        <td>{{data.JobNo}}</td>
+        <td>{{data.JobTitle}}</td>
+        <td>{{data.CompanyName}}</td>
+        <td>{{data.Location}}</td>
+        <td>{{data.ShortDescription}}</td>
+        <td>{{data.FullDescription}}</td>
+        <td>{{data.JobNature}}</td>
+        <td>{{data.SalaryRange}}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete,data)">
+            <i class="fa fa-remove"></i>Delete</button>
+            <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit,data)">
+              <i class="fa fa-edit"></i>Edit</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="deleteRow(PostJobService.id)"></button> -->
+        </td>
+        <!-- <button (click)="deleteProduct(product)" class="btn btn-info"> Delete</button> -->
+      </tr>
+  </tbody>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<!-- <pagination-controls id="listing_pagination" maxSize="4" directionLinks="true" (pageChange)="page = $event"></pagination-controls> -->
+</div>
+
+
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+<div *ngFor="let data of data" class="detail">
+  <div class="media display-inline text-align-center">
+  <img src="assets/imags/job-post-icone-1.png" alt="John Doe" class="mr-3 ">
+  <div class="media-body text-left  text-align-center">
+  <h6>{{data.JobTitle}}</h6>
+  <i class="large material-icons">account_balance</i>
+  <span class="text">{{data.CompanyName}}</span>
+  <br />
+  <i class="large material-icons">place</i>
+  <span class="text font-size">{{data.Location}}</span>
+  <i style="margin-left: 150px;" class="large material-icons">attach_money</i>
+  <span style="margin-left: 10px;" class="text font-size">Rs. {{data.SalaryRange}}</span>
+  <div class="float-right margin-top text-align-center">
+  <a href="#" class="part-full-time">Part Time</a>
+  <p class="date-time">Deadline: May 23, 2018</p>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+<!-- update -->
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title2">Update Job Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <form [formGroup]="editForm" novalidate>
+          <div class="form-group">
+           <label for="JobNo"></label>
+           <div class="input-group">
+              <input formControlName="JobNo" class="form-control">
+           </div>
+         </div>
+          <div class="form-group">
+            <label for="JobTitle">JobTitle</label>
+            <div class="input-group">
+              <input formControlName="JobTitle" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="CompanyName">CompanyName</label>
+            <div class="input-group">
+              <input formControlName="CompanyName" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Location">Location</label>
+            <div class="input-group">
+              <input formControlName="Location" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ShortDescription">ShortDescription</label>
+            <div class="input-group">
+              <input formControlName="ShortDescription" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="FullDescription">FullDescription</label>
+            <div class="input-group">
+              <input formControlName="FullDescription" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="JobNature">JobNature</label>
+            <div class="input-group">
+              <input formControlName="JobNature" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="SalaryRange">SalaryRange</label>
+            <div class="input-group">
+              <input formControlName="SalaryRange" class="form-control">
+            </div>
+          </div>
+
+          <div class="border text-center">
+              <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Save Changes</button>
+          </div>
+        </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+
+
+
